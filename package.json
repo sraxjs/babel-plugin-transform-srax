@@ -1,0 +1,21 @@
+{
+    "name": "@sraxjs/babel-plugin-transform-srax",
+    "version": "0.0.3",
+    "description": "srax",
+    "keywords": [
+        "srax"
+    ],
+    "main": "./src/main.mjs",
+    "dependencies": {
+        "@babel/types": "^7.16.0"
+    },
+    "license": "MIT",
+    "author": "menmaojia",
+    "files": [
+        "src/"
+    ],
+    "engines": {
+        "node": ">=6.9.2",
+        "npm": ">=3.0.0"
+    }
+}
