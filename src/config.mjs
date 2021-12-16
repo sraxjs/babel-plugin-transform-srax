@@ -1,24 +1,28 @@
 // 框架名字
 export const FrameworkName = 'Srax';
 
-// JSX 表达式方法
-export const CreateJSXExpressionName = FrameworkName + '.Hook.createJSXExpression';
+// 判断是不是一个带有上下文方法的标识
+export const ContextFunctionIdentification = [FrameworkName + '.Hook.context', 'Hook.context']
 
-// 框架函数方法
-export const CreateSraxFunctionName = FrameworkName + '.Hook.createSraxFunction';
+// Hook.effect
+export const EffectIdentification = [FrameworkName + '.Hook.effect', 'Hook.effect'];
 
-// params 方法
-export const CreateFunctionParamInterceptorName = FrameworkName + '.Hook.createFunctionParamInterceptor';
+// 动态变量
+// 在 return 或者 jsx {} 表达式外面包裹一个方法，形成闭包
+export const CreateVariableContext = FrameworkName + '.Hook.CreateVariableContext';
 
-// 页面上下文方法
-export const CreateFunctionContextName = FrameworkName + '.Hook.createFunctionContext';
-export const CreateFunctionContextVarName = '$$' + FrameworkName + 'HookFunctionContext';
+// 函数上下文
+export const CreateFunctionContext = FrameworkName + '.Hook.CreateFunctionContext';
 
-// {...attrs} 方法
-export const DataJSXSpreadAttribute = 'srax-jsx-spread-attribute';
+// 带有 Hook.context 的方法的 return 包裹一层
+export const CreateReturnContext = FrameworkName + '.Hook.CreateReturnContext';
+
 // 框架路径，由此识别当前页面是否有用框架
-// export const SraxNPMPath = '../../srax/main';
+// export const SraxNPMPath = '../../../../srax/src/main';
 export const SraxNPMPath = '@sraxjs/srax';
 
 // 所有 function 类型
 export const AllFunctionType = ['ArrowFunctionExpression', 'FunctionExpression', 'FunctionDeclaration'];
+
+// {...attrs} 方法
+export const DataJSXSpreadAttribute = 'srax-jsx-spread-attribute';

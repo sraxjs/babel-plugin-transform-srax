@@ -1,6 +1,6 @@
 {
     "name": "@sraxjs/babel-plugin-transform-srax",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "description": "srax",
     "keywords": [
         "srax"
@@ -17,5 +17,8 @@
     "engines": {
         "node": ">=6.9.2",
         "npm": ">=3.0.0"
+    },
+    "devDependencies": {
+        "@babel/traverse": "^7.16.3"
     }
 }

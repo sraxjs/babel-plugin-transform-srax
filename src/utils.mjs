@@ -1,37 +1,51 @@
-import { AllFunctionType } from './config.mjs';
-
-const IsUseSrax = (ref) => {
+export const IsUseSrax = (ref) => {
     return ref?.SraxOptions?.isUseSrax || false;
 }
 
-const GetParentFunctionExpression = (path, ref) => {
-    let parent = path?.context?.parentPath;
-    if (parent && AllFunctionType.indexOf(parent.type) === -1) {
-        return GetParentFunctionExpression(parent);
+export const MemberExpressionToString = (me, suffix = '') => {
+
+    let property = me.property;
+    let object = me.object;
+
+    suffix = object.name + '.' + property.name + suffix;
+
+    switch (object.type) {
+        case 'Identifier':
+            return suffix;
+        case 'MemberExpression':
+            return MemberExpressionToString(object, '.' + suffix);
     }
-    return parent;
+
 }
 
-const InitSraxOptions = (path, obj, value) => {
-    if (!path.SraxOptions) {
-        path.SraxOptions = {};
-    }
-    if (!path.SraxOptions[obj]) {
-        path.SraxOptions[obj] = value;
-    }
-    return path;
-}
+// 检查是否使用了某些 Hook
+export const IsUseHook = (path, Hooks) => {
 
-const IsSraxFunction = (path) => {
-    if (AllFunctionType.indexOf(path?.node?.type) > -1 && path?.node?.body?.SraxOptions?.isSraxFunction) {
-        return true;
+    let node = path.node;
+
+    if (node.type === 'CallExpression') {
+        let callee = node.callee;
+        if (callee?.type === 'MemberExpression') {
+            let meString = MemberExpressionToString(callee);
+            if (Hooks.indexOf(meString) > -1) {
+                return true;
+            }
+        }
     }
+
     return false;
+
+};
+
+// 在表达式上插入标志，用于以后判断免得嵌套递归
+export const AddSraxHandle = (expression) => {
+    expression.isSraxHandle = true;
+    return expression;
 }
 
 export default {
-    isUseSrax: IsUseSrax,
-    getParentFunctionExpression: GetParentFunctionExpression,
-    initSraxOptions: InitSraxOptions,
-    isSraxFunction: IsSraxFunction
+    IsUseSrax,
+    MemberExpressionToString,
+    IsUseHook,
+    AddSraxHandle
 }
